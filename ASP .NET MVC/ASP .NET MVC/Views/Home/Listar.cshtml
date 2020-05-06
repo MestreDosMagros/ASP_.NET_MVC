@@ -1,0 +1,68 @@
+﻿@model List<User>;
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Listar</h1>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Sobrenome
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>
+                        @user.Nome
+                    </td>
+                    <td>
+                        @user.Sobrenome
+                    </td>
+                    <td>
+                        <i class="fa fa-edit" onclick="updateUser(@user.Id)"></i>
+                        <i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete" onclick="deleteUser(@user.Id)"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modalDelete">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizar usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="okDeleteUser()" class="btn btn-primary">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
